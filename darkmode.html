@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Central Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class' }
+    </script>
+</head>
+<body class="bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-white transition-colors duration-300 min-h-screen p-6 relative">
+
+    <!-- Top-Right Corner Theme Toggle Button -->
+    <div class="absolute top-6 right-6">
+        <button onclick="toggleTheme()" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-white font-medium text-sm rounded-full shadow-md transition-all flex items-center gap-2 border border-slate-300 dark:border-slate-600">
+            <span id="theme-icon">🌙</span>
+            <span id="theme-text">Dark Mode</span>
+        </button>
+    </div>
+
+    <!-- Main Content Header -->
+    <div class="max-w-3xl mx-auto mt-12 text-center">
+        <h1 class="text-3xl font-bold mb-3">Go Interactive Central Portal</h1>
+        <p class="text-slate-600 dark:text-slate-400 text-sm">
+            Welcome to the updated data portal with theme switcher functionality.
+        </p>
+    </div>
+
+    <!-- JavaScript Logic for Light / Dark Mode Switching -->
+    <script>
+        function toggleTheme() {
+            const htmlElement = document.getElementById('html-root');
+            const icon = document.getElementById('theme-icon');
+            const text = document.getElementById('theme-text');
+
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                icon.textContent = '🌙';
+                text.textContent = 'Dark Mode';
+            } else {
+                htmlElement.classList.add('dark');
+                icon.textContent = '☀️';
+                text.textContent = 'Light Mode';
+            }
+        }
+    </script>
+</body>
+</html>

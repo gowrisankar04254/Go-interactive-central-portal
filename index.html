@@ -46,9 +46,10 @@
     <header class="gradient-header text-white shadow-lg sticky top-0 z-50">
         <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <div class="bg-white/10 p-2.5 rounded-xl backdrop-blur-md border border-white/20">
-                    <i class="fa-solid font-bold fa-globe text-2xl text-blue-200"></i>
-                </div>
+                <!-- Settings icon on the top left corner for Admin Access -->
+                <button onclick="toggleAdminView()" title="Settings" class="bg-white/10 p-2.5 rounded-xl backdrop-blur-md border border-white/20 hover:bg-white/20 transition">
+                    <i class="fa-solid fa-gear text-xl text-blue-200"></i>
+                </button>
                 <div>
                     <h1 class="text-xl md:text-2xl font-extrabold tracking-tight">Go-Interactive Portal</h1>
                     <p class="text-xs text-blue-200 font-medium">Centralized Announcement & Tagged Link Hub</p>
@@ -335,21 +336,23 @@
             }
         }
 
-        function checkRoute() {
-            const path = window.location.pathname;
-            const hash = window.location.hash;
-            
-            if (path.includes('admin') || hash.includes('admin')) {
-                const pubSection = document.getElementById('public-section');
-                const admSection = document.getElementById('admin-section');
+        function toggleAdminView() {
+            const pubSection = document.getElementById('public-section');
+            const admSection = document.getElementById('admin-section');
+            const isHidden = admSection.classList.contains('hidden');
+
+            if (isHidden) {
                 pubSection.classList.add('hidden');
                 admSection.classList.remove('hidden');
                 checkAdminAuth();
+            } else {
+                exitAdmin();
             }
         }
 
         function exitAdmin() {
-            window.location.href = window.location.pathname.replace(/\/admin.*$/, '');
+            document.getElementById('public-section').classList.remove('hidden');
+            document.getElementById('admin-section').classList.add('hidden');
         }
 
         function renderPublicPosts() {
@@ -534,7 +537,6 @@
 
         window.onload = function() {
             fetchPosts();
-            checkRoute();
         };
     </script>
 </body>
